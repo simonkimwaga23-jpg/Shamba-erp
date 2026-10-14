@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>🐔</span><h2>SHAMBA ERP</h2></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html" class="active">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Production</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="categories">🐔 Categories</button>
+        <button class="tab" data-tab="health">🏥 Health</button>
+        <button class="tab" data-tab="eggs">🥚 Eggs</button>
+        <button class="tab" data-tab="growth">📈 Growth</button>
+      </div>
+
+      <section class="panel tab-content" id="tab-categories">
+        <div class="panel-header">
+          <h2>Categories</h2>
+          <button id="addCategoryBtn" class="btn-primary">+ Add Category</button>
+        </div>
+
+        <div id="addCategoryForm" class="form-box" style="display:none;">
+          <h3>Add New Category</h3>
+          <div class="input-group"><span>📛</span><input type="text" id="catName" placeholder="Name (e.g. Chicken)"></div>
+          <div class="input-group"><span>🎭</span>
+            <select id="catMainType"><option value="livestock">Livestock</option><option value="crops">Crops</option></select>
+          </div>
+          <div class="input-group"><span>📝</span><input type="text" id="catDescription" placeholder="Description"></div>
+          <div class="form-actions">
+            <button id="saveCategoryBtn" class="btn-primary">Save</button>
+            <button id="cancelCategoryBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Name</th><th>Main Type</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody id="categoriesTableBody"><tr><td colspan="5">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <section class="panel tab-content" id="tab-health" style="display:none;">
+        <div class="panel-header">
+          <h2>Health Records</h2>
+          <button id="addHealthBtn" class="btn-primary">+ Add Record</button>
+        </div>
+
+        <div id="addHealthForm" class="form-box" style="display:none;">
+          <h3>Add Health Record</h3>
+          <div class="input-group"><span>🐔</span><select id="healthCategory"></select></div>
+          <div class="input-group"><span>🦠</span><input type="text" id="healthDisease" placeholder="Disease name"></div>
+          <div class="input-group"><span>🤒</span><input type="number" id="healthSick" placeholder="Sick count"></div>
+          <div class="input-group"><span>⚰️</span><input type="number" id="healthDeaths" placeholder="Deaths"></div>
+          <div class="input-group"><span>💚</span><input type="number" id="healthRecovered" placeholder="Recovered"></div>
+          <div class="input-group"><span>💰</span><input type="number" id="healthCost" placeholder="Cost (TZS)"></div>
+          <div class="form-actions">
+            <button id="saveHealthBtn" class="btn-primary">Save</button>
+            <button id="cancelHealthBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Disease</th><th>Sick</th><th>Deaths</th><th>Recovered</th><th>Cost</th></tr></thead>
+          <tbody id="healthTableBody"><tr><td colspan="7">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <section class="panel tab-content" id="tab-eggs" style="display:none;">
+        <div class="panel-header"><h2>Egg Production</h2></div>
+        <p class="muted">Go to <a href="eggs.html">Eggs Page</a> for full management.</p>
+      </section>
+
+      <section class="panel tab-content" id="tab-growth" style="display:none;">
+        <div class="panel-header"><h2>Growth Tracking</h2></div>
+        <p class="muted">Go to <a href="growth.html">Growth Page</a> for full management.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed Management - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>🐔</span><h2>SHAMBA ERP</h2></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html" class="active">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Feed Management</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <section class="panel">
+        <h2>Feed Calculator</h2>
+        <div class="form-box" style="margin-top: 20px;">
+          <div class="input-group"><span>🐔</span><input type="number" id="calcBirds" placeholder="Number of birds"></div>
+          <div class="input-group"><span>📅</span><input type="number" id="calcAge" placeholder="Age (days)"></div>
+          <div class="input-group"><span>⚖️</span><input type="number" id="calcPerBird" placeholder="Feed per bird/day (g)" value="100"></div>
+          <div class="form-actions">
+            <button id="calcBtn" class="btn-primary">Calculate</button>
+          </div>
+        </div>
+
+        <div id="calcResult" class="kpi-grid" style="margin-top: 20px; display:none;">
+          <div class="kpi-card"><h3>📊 Daily</h3><p id="dailyFeed">0 kg</p></div>
+          <div class="kpi-card"><h3>📅 Weekly</h3><p id="weeklyFeed">0 kg</p></div>
+          <div class="kpi-card"><h3>📆 Monthly</h3><p id="monthlyFeed">0 kg</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

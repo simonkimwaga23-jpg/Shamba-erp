@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>🐔</span><h2>SHAMBA ERP</h2></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html" class="active">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Reports</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="monthly">📅 Monthly</button>
+        <button class="tab" data-tab="yearly">📆 Yearly</button>
+        <button class="tab" data-tab="inventory">📦 Inventory</button>
+      </div>
+
+      <section class="panel tab-content" id="tab-monthly">
+        <h2>Monthly Report</h2>
+        <div class="kpi-grid" style="margin-top: 20px;">
+          <div class="kpi-card"><h3>💰 Revenue</h3><p id="monthRevenue">0</p></div>
+          <div class="kpi-card"><h3>💸 Expenses</h3><p id="monthExpenses">0</p></div>
+          <div class="kpi-card"><h3>📊 Profit</h3><p id="monthProfit">0</p></div>
+        </div>
+      </section>
+
+      <section class="panel tab-content" id="tab-yearly" style="display:none;">
+        <h2>Yearly Report</h2>
+        <div class="kpi-grid" style="margin-top: 20px;">
+          <div class="kpi-card"><h3>💰 Revenue</h3><p id="yearRevenue">0</p></div>
+          <div class="kpi-card"><h3>💸 Expenses</h3><p id="yearExpenses">0</p></div>
+          <div class="kpi-card"><h3>📊 Profit</h3><p id="yearProfit">0</p></div>
+        </div>
+      </section>
+
+      <section class="panel tab-content" id="tab-inventory" style="display:none;">
+        <h2>Inventory Report</h2>
+        <table class="data-table" style="margin-top: 20px;">
+          <thead><tr><th>Item</th><th>Category</th><th>Quantity</th><th>Status</th></tr></thead>
+          <tbody id="inventoryTableBody"><tr><td colspan="4">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

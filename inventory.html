@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>🐔</span><h2>SHAMBA ERP</h2></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html" class="active">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Inventory</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Stock Levels</h2>
+          <button id="addStockBtn" class="btn-primary">+ Add Item</button>
+        </div>
+
+        <div id="addStockForm" class="form-box" style="display:none;">
+          <div class="input-group"><span>📛</span><input type="text" id="stockName" placeholder="Item name"></div>
+          <div class="input-group"><span>📂</span>
+            <select id="stockCategory">
+              <option value="feed">Feed</option>
+              <option value="medicine">Medicine</option>
+              <option value="equipment">Equipment</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="input-group"><span>🔢</span><input type="number" id="stockQty" placeholder="Quantity"></div>
+          <div class="input-group"><span>📏</span><input type="text" id="stockUnit" placeholder="Unit (kg, pcs)"></div>
+          <div class="input-group"><span>💰</span><input type="number" id="stockCost" placeholder="Unit cost"></div>
+          <div class="form-actions">
+            <button id="saveStockBtn" class="btn-primary">Save</button>
+            <button id="cancelStockBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Item</th><th>Category</th><th>Quantity</th><th>Unit</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="stockTableBody"><tr><td colspan="8">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

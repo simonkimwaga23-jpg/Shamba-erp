@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-left">
+      <!-- SKY BACKGROUND -->
+      <div class="sky">
+        <div class="sun"></div>
+        <div class="cloud cloud-1">☁️</div>
+        <div class="cloud cloud-2">☁️</div>
+        <div class="cloud cloud-3">☁️</div>
+      </div>
+
+      <!-- FARM SCENE -->
+      <div class="farm-scene">
+        <!-- Trees -->
+        <div class="tree tree-1">🌳</div>
+        <div class="tree tree-2">🌴</div>
+        <div class="tree tree-3">🌳</div>
+
+        <!-- Large animals (background) -->
+        <div class="animal-large animal-1">🐄</div>
+        <div class="animal-large animal-2">🐐</div>
+        <div class="animal-large animal-3">🐑</div>
+
+        <!-- Small animals (foreground) -->
+        <div class="animal-small animal-4">🐔</div>
+        <div class="animal-small animal-5">🐔</div>
+        <div class="animal-small animal-6">🦆</div>
+        <div class="animal-small animal-7">🐔</div>
+        <div class="animal-small animal-8">🦆</div>
+        <div class="animal-small animal-9">🐔</div>
+        <div class="animal-small animal-10">🐣</div>
+        <div class="animal-small animal-11">🐔</div>
+      </div>
+
+      <!-- LOGO OVERLAY -->
+      <div class="login-overlay">
+        <div class="circle">🌾</div>
+        <h1>SHAMBA ERP</h1>
+        <p>Farm Management System</p>
+      </div>
+    </div>
+
+    <div class="login-right">
+      <div class="login-logo">
+        <h2>Welcome Back</h2>
+        <p>Sign in to your account</p>
+      </div>
+
+      <form id="loginForm">
+        <div class="input-group">
+          <span>👤</span>
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+
+        <div class="input-group">
+          <span>🔒</span>
+          <input type="password" id="password" placeholder="Password" required>
+        </div>
+
+        <div class="options">
+          <label><input type="checkbox"> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">LOGIN</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
