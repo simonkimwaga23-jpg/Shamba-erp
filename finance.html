@@ -1,0 +1,179 @@
+<!-- ============================================================
+     FILE: finance.html
+     MAHALI: shamba-erp/finance.html
+     KAZI: Badilisha YOTE (na Break-even Point)
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="SHAMBAHUB.png" alt="Shamba Hub"></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html" class="active">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Finance</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="expenses">💸 Expenses</button>
+        <button class="tab" data-tab="entries">📥 Entries</button>
+        <button class="tab" data-tab="exits">📤 Exits</button>
+        <button class="tab" data-tab="summary">📊 Summary</button>
+      </div>
+
+      <!-- ============================================================
+           TAB 1: EXPENSES
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-expenses">
+        <div class="panel-header">
+          <h2>Expenses</h2>
+          <button id="addExpenseBtn" class="btn-primary">+ Add Expense</button>
+        </div>
+
+        <div id="addExpenseForm" class="form-box" style="display:none;">
+          <h3>Add New Expense</h3>
+          <div class="input-group"><span>🎭</span>
+            <select id="expType">
+              <option value="food">Food</option>
+              <option value="medicine">Medicine</option>
+              <option value="device">Device</option>
+              <option value="tray">Tray</option>
+              <option value="power">Power / Token</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="tools">Tools</option>
+              <option value="purchase">Purchase</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="input-group"><span>📦</span><input type="text" id="expItem" placeholder="Item"></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="expQuantity" placeholder="Quantity"></div>
+          <div class="input-group"><span>💰</span><input type="number" id="expAmount" placeholder="Amount (TZS)"></div>
+          <div class="input-group"><span>📝</span><input type="text" id="expNotes" placeholder="Notes (optional)"></div>
+          <div class="form-actions">
+            <button id="saveExpenseBtn" class="btn-primary">Save</button>
+            <button id="cancelExpenseBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Type</th><th>Item</th><th>Qty</th><th>Amount</th><th>Actions</th></tr></thead>
+          <tbody id="expensesTableBody"><tr><td colspan="7">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           TAB 2: ENTRIES
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-entries" style="display:none;">
+        <div class="panel-header">
+          <h2>Entries (IN)</h2>
+          <button id="addEntryBtn" class="btn-primary">+ Add Entry</button>
+        </div>
+
+        <div id="addEntryForm" class="form-box" style="display:none;">
+          <h3>Add New Entry</h3>
+          <div class="input-group"><span>🎭</span>
+            <select id="entryType">
+              <option value="chicken">Chicken</option>
+              <option value="feed">Feed</option>
+              <option value="medicine">Medicine</option>
+              <option value="eggs">Eggs</option>
+            </select>
+          </div>
+          <div class="input-group"><span>📦</span><input type="text" id="entryItem" placeholder="Item"></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="entryQuantity" placeholder="Quantity"></div>
+          <div class="input-group"><span>💰</span><input type="number" id="entryCost" placeholder="Cost (TZS)"></div>
+          <div class="input-group"><span>📝</span><input type="text" id="entryNotes" placeholder="Notes (optional)"></div>
+          <div class="form-actions">
+            <button id="saveEntryBtn" class="btn-primary">Save</button>
+            <button id="cancelEntryBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Type</th><th>Item</th><th>Qty</th><th>Cost</th><th>Actions</th></tr></thead>
+          <tbody id="entriesTableBody"><tr><td colspan="7">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           TAB 3: EXITS
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-exits" style="display:none;">
+        <div class="panel-header">
+          <h2>Exits (OUT)</h2>
+          <button id="addExitBtn" class="btn-primary">+ Add Exit</button>
+        </div>
+
+        <div id="addExitForm" class="form-box" style="display:none;">
+          <h3>Add New Exit</h3>
+          <div class="input-group"><span>🎭</span>
+            <select id="exitType">
+              <option value="sales">Sales</option>
+              <option value="deaths">Deaths</option>
+              <option value="expenses">Expenses</option>
+            </select>
+          </div>
+          <div class="input-group"><span>📦</span><input type="text" id="exitItem" placeholder="Item"></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="exitQuantity" placeholder="Quantity"></div>
+          <div class="input-group"><span>💰</span><input type="number" id="exitAmount" placeholder="Amount (TZS)"></div>
+          <div class="input-group"><span>📝</span><input type="text" id="exitNotes" placeholder="Notes (optional)"></div>
+          <div class="form-actions">
+            <button id="saveExitBtn" class="btn-primary">Save</button>
+            <button id="cancelExitBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Type</th><th>Item</th><th>Qty</th><th>Amount</th><th>Actions</th></tr></thead>
+          <tbody id="exitsTableBody"><tr><td colspan="7">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           TAB 4: SUMMARY (NA BREAK-EVEN)
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-summary" style="display:none;">
+        <h2>Financial Summary</h2>
+        <div class="kpi-grid" style="margin-top: 20px;">
+          <div class="kpi-card"><h3>💸 Total Expenses</h3><p id="totalExpenses">0 TZS</p></div>
+          <div class="kpi-card"><h3>💰 Total Income</h3><p id="totalIncome">0 TZS</p></div>
+          <div class="kpi-card"><h3>📊 Profit</h3><p id="totalProfit">0 TZS</p></div>
+
+          <!-- BREAK-EVEN (MPYA) -->
+          <div class="kpi-card"><h3>📈 Break-even Point</h3><p id="breakEven">0 units</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

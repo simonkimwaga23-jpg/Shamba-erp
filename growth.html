@@ -1,0 +1,72 @@
+<!-- ============================================================
+     FILE: growth.html
+     MAHALI: shamba-erp/growth.html
+     KAZI: Badilisha YOTE (marekebisho kamili)
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth Tracking - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="SHAMBAHUB.png" alt="Shamba Hub"></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html" class="active">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Growth Tracking</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Weight Records</h2>
+          <button id="addGrowthBtn" class="btn-primary">+ Add Record</button>
+        </div>
+
+        <div id="addGrowthForm" class="form-box" style="display:none;">
+          <h3>Add Growth Record</h3>
+          <div class="input-group"><span>🐔</span><select id="growthCategory"></select></div>
+          <div class="input-group"><span>📅</span><input type="number" id="growthAge" placeholder="Age (days)"></div>
+          <div class="input-group"><span>⚖️</span><input type="number" id="growthWeight" placeholder="Avg weight (g)"></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="growthSample" placeholder="Sample size"></div>
+          <div class="form-actions">
+            <button id="saveGrowthBtn" class="btn-primary">Save</button>
+            <button id="cancelGrowthBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Category</th><th>Age</th><th>Avg Weight</th><th>Sample</th><th>Actions</th></tr></thead>
+          <tbody id="growthTableBody"><tr><td colspan="7">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

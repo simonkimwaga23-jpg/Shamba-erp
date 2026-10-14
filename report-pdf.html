@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Report - Shamba ERP</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background: #f5f6fa; padding: 20px; }
+    .pdf-page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: white;
+      padding: 20mm;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .pdf-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #1e3c72;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+    .pdf-logo img { height: 70px; width: auto; }
+    .pdf-meta { text-align: right; font-size: 11px; color: #666; line-height: 1.8; }
+    .pdf-meta strong { color: #1e3c72; }
+    .pdf-title {
+      text-align: center; font-size: 22px; color: #1e3c72;
+      margin-bottom: 25px; text-transform: uppercase; letter-spacing: 3px;
+    }
+    .pdf-section { margin-bottom: 25px; }
+    .pdf-section h2 {
+      font-size: 14px; color: #1e3c72; border-left: 4px solid #1e3c72;
+      padding-left: 10px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .pdf-kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+    .pdf-kpi-card { background: #f5f6fa; padding: 15px; border-radius: 8px; border-left: 4px solid #1e3c72; }
+    .pdf-kpi-card span { font-size: 11px; color: #666; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+    .pdf-kpi-card strong { font-size: 18px; color: #1e3c72; }
+    .pdf-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .pdf-table th { background: #1e3c72; color: white; padding: 10px; text-align: left; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+    .pdf-table td { padding: 8px 10px; border-bottom: 1px solid #e0e0e0; }
+    .pdf-table tr:nth-child(even) { background: #f9f9f9; }
+    .pdf-contact { margin-top: 40px; padding: 20px; background: #f5f6fa; border-radius: 8px; border-left: 4px solid #28a745; }
+    .pdf-contact h3 { color: #1e3c72; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 2px; }
+    .pdf-contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 11px; color: #333; }
+    .pdf-contact-grid p { line-height: 1.8; }
+    .pdf-contact-grid strong { color: #1e3c72; }
+    @media print {
+      body { background: white; padding: 0; }
+      .pdf-page { box-shadow: none; margin: 0; width: 100%; min-height: auto; padding: 15mm; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pdf-page">
+    <div class="pdf-header">
+      <div class="pdf-logo">
+        <img src="SHAMBAHUB.png" alt="Shamba ERP">
+      </div>
+      <div class="pdf-meta">
+        <p><strong>Report:</strong> <span id="reportType">-</span></p>
+        <p><strong>Period:</strong> <span id="reportDate">-</span></p>
+        <p><strong>Generated:</strong> <span id="generatedAt">-</span></p>
+      </div>
+    </div>
+
+    <h2 class="pdf-title" id="reportTitle">Report</h2>
+
+    <div class="pdf-section">
+      <h2>Financial Summary</h2>
+      <div class="pdf-kpi">
+        <div class="pdf-kpi-card"><span>Revenue</span><strong id="pdfRevenue">0 TZS</strong></div>
+        <div class="pdf-kpi-card"><span>Expenses</span><strong id="pdfExpenses">0 TZS</strong></div>
+        <div class="pdf-kpi-card"><span>Profit</span><strong id="pdfProfit">0 TZS</strong></div>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <h2>Details</h2>
+      <table class="pdf-table">
+        <thead>
+          <tr><th>#</th><th>Date</th><th>Type</th><th>Item</th><th>Amount (TZS)</th></tr>
+        </thead>
+        <tbody id="pdfTableBody">
+          <tr><td colspan="5">No data</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pdf-contact">
+      <h3>Contact Information</h3>
+      <div class="pdf-contact-grid">
+        <p><strong>Email:</strong> kimwagasimon0223@gmail.com</p>
+        <p><strong>Phone:</strong> +255 703 709 166</p>
+        <p><strong>Location:</strong> Mwanza, Tanzania</p>
+        <p><strong>Website:</strong> shamba-erp.pages.dev</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://hgwtadtxidwljpoikesg.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhnd3RhZHR4aWR3bGpwb2lrZXNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4ODU4MjAsImV4cCI6MjEwNzQ2MTgyMH0.x1pZgX2ucJSw3Gmb4HUAFgbyeId6sFufTHT-s5E0YuU";
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const params = new URLSearchParams(window.location.search);
+    const start = params.get('start') || new Date().toISOString().split('T')[0];
+    const end = params.get('end') || new Date().toISOString().split('T')[0];
+    const periodName = params.get('period') || 'Report';
+
+    document.getElementById('reportType').textContent = periodName;
+    document.getElementById('reportDate').textContent = `${start} → ${end}`;
+    document.getElementById('generatedAt').textContent = new Date().toLocaleString();
+    document.getElementById('reportTitle').textContent = periodName + ' Report';
+
+    async function loadReport() {
+      const { data: ex } = await supabaseClient.from('exits').select('*').eq('is_deleted', false).gte('date', start).lte('date', end);
+      const { data: exp } = await supabaseClient.from('expenses').select('*').eq('is_deleted', false).gte('date', start).lte('date', end);
+
+      const rev = (ex || []).reduce((s, e) => s + Number(e.amount || 0), 0);
+      const expTotal = (exp || []).reduce((s, e) => s + Number(e.amount || 0), 0);
+
+      document.getElementById('pdfRevenue').textContent = rev.toLocaleString() + ' TZS';
+      document.getElementById('pdfExpenses').textContent = expTotal.toLocaleString() + ' TZS';
+      document.getElementById('pdfProfit').textContent = (rev - expTotal).toLocaleString() + ' TZS';
+
+      const allRows = [
+        ...(ex || []).map(e => ({ ...e, category: 'Exit' })),
+        ...(exp || []).map(e => ({ ...e, category: 'Expense' }))
+      ].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+      const tbody = document.getElementById('pdfTableBody');
+      if (allRows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No data</td></tr>';
+      } else {
+        tbody.innerHTML = allRows.map((r, i) => `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${r.date || '-'}</td>
+            <td>${r.category}</td>
+            <td>${r.item || '-'}</td>
+            <td>${Number(r.amount || 0).toLocaleString()}</td>
+          </tr>
+        `).join('');
+      }
+
+      setTimeout(() => { try { window.print(); } catch(e) { console.log(e); } }, 800);
+    }
+
+    loadReport();
+  </script>
+</body>
+</html>
