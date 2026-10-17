@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="SHAMBAHUB.png" alt="Shamba Hub"></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html" class="active">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Calendar & Events</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="hatch">🐣 Hatch</button>
+        <button class="tab" data-tab="vaccination">💉 Vaccination</button>
+        <button class="tab" data-tab="task">📋 Tasks</button>
+      </div>
+
+      <!-- HATCH TAB -->
+      <section class="panel tab-content" id="tab-hatch">
+        <div class="panel-header">
+          <h2>Hatch Events</h2>
+          <button id="addHatchBtn" class="btn-primary">+ Add Hatch</button>
+        </div>
+
+        <div id="addHatchForm" class="form-box" style="display:none;">
+          <h3>Add Hatch Event</h3>
+          <div class="input-group"><span>📛</span><input type="text" id="hatchTitle" placeholder="Title (e.g. Batch #1 hatch)"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="hatchDate"></div>
+          <div class="input-group"><span>📝</span><input type="text" id="hatchNotes" placeholder="Notes"></div>
+          <div class="form-actions">
+            <button id="saveHatchBtn" class="btn-primary">Save</button>
+            <button id="cancelHatchBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Title</th><th>Notes</th><th>Actions</th></tr></thead>
+          <tbody id="hatchTableBody"><tr><td colspan="5">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- VACCINATION TAB -->
+      <section class="panel tab-content" id="tab-vaccination" style="display:none;">
+        <div class="panel-header">
+          <h2>Vaccination Events</h2>
+          <button id="addVaccBtn" class="btn-primary">+ Add Vaccination</button>
+        </div>
+
+        <div id="addVaccForm" class="form-box" style="display:none;">
+          <h3>Add Vaccination Event</h3>
+          <div class="input-group"><span>📛</span><input type="text" id="vaccTitle" placeholder="Vaccine name"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="vaccDate"></div>
+          <div class="input-group"><span>🐔</span><input type="text" id="vaccFlock" placeholder="Flock (e.g. Broiler)"></div>
+          <div class="form-actions">
+            <button id="saveVaccBtn" class="btn-primary">Save</button>
+            <button id="cancelVaccBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Vaccine</th><th>Flock</th><th>Actions</th></tr></thead>
+          <tbody id="vaccTableBody"><tr><td colspan="5">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- TASK TAB -->
+      <section class="panel tab-content" id="tab-task" style="display:none;">
+        <div class="panel-header">
+          <h2>Tasks</h2>
+          <button id="addTaskBtn" class="btn-primary">+ Add Task</button>
+        </div>
+
+        <div id="addTaskForm" class="form-box" style="display:none;">
+          <h3>Add Task</h3>
+          <div class="input-group"><span>📛</span><input type="text" id="taskTitle" placeholder="Task title"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="taskDate"></div>
+          <div class="input-group"><span>⚡</span>
+            <select id="taskPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button id="saveTaskBtn" class="btn-primary">Save</button>
+            <button id="cancelTaskBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Date</th><th>Task</th><th>Priority</th><th>Actions</th></tr></thead>
+          <tbody id="tasksTableBody"><tr><td colspan="5">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
