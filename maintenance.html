@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maintenance - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="SHAMBAHUB.png" alt="Shamba Hub"></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html" class="active">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Maintenance</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Maintenance Logs</h2>
+          <button id="addMaintenanceBtn" class="btn-primary">+ Add Maintenance</button>
+        </div>
+
+        <div id="addMaintenanceForm" class="form-box" style="display:none;">
+          <h3>Add Maintenance Record</h3>
+
+          <div class="input-group"><span>🔧</span><select id="maintAsset"></select></div>
+          <div class="input-group"><span>🎭</span>
+            <select id="maintType">
+              <option value="service">Service</option>
+              <option value="repair">Repair</option>
+              <option value="replacement">Replacement</option>
+              <option value="inspection">Inspection</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="input-group"><span>💰</span><input type="number" id="maintCost" placeholder="Cost (TZS)"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="maintDate"></div>
+          <div class="input-group"><span>👤</span><input type="text" id="maintPerformedBy" placeholder="Performed by"></div>
+          <div class="input-group"><span>📝</span><input type="text" id="maintNotes" placeholder="Notes"></div>
+          <div class="input-group"><span>⏰</span><input type="date" id="maintNextDate"></div>
+
+          <div class="form-actions">
+            <button id="saveMaintenanceBtn" class="btn-primary">Save</button>
+            <button id="cancelMaintenanceBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <div class="kpi-grid" style="margin-bottom: 20px;">
+          <div class="kpi-card"><h3>🔧 Total Maintenance</h3><p id="totalMaintenance">0 TZS</p></div>
+          <div class="kpi-card"><h3>📊 This Month</h3><p id="monthMaintenance">0 TZS</p></div>
+          <div class="kpi-card"><h3>⏰ Upcoming</h3><p id="upcomingMaintenance">0</p></div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Asset</th>
+              <th>Type</th>
+              <th>Cost</th>
+              <th>Performed By</th>
+              <th>Next Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="maintenanceTableBody"><tr><td colspan="8">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

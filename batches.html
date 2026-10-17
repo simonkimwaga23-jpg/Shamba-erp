@@ -1,0 +1,198 @@
+<!-- ============================================================
+     FILE: batches.html
+     MAHALI: shamba-erp/batches.html
+     KAZI: Badilisha YOTE (kamili — na Verify Hatch, Turning, Candling)
+     ============================================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batches - Shamba ERP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><img src="SHAMBAHUB.png" alt="Shamba Hub"></div>
+      <nav>
+        <a href="dashboard.html">🏠 Dashboard</a>
+        <a href="users.html">👥 Users</a>
+        <a href="operations.html" class="active">🔧 Operations</a>
+        <a href="production.html">📦 Production</a>
+        <a href="finance.html">💰 Finance</a>
+        <a href="reports.html">📥📤 Reports</a>
+        <a href="analytics.html">📊 Analytics</a>
+        <a href="calendar.html">📅 Calendar</a>
+        <a href="notifications.html">📢 Notifications</a>
+        <a href="settings.html">⚙️ Settings</a>
+      </nav>
+      <button id="logoutBtn" class="logout">Logout</button>
+    </aside>
+
+    <main class="content">
+      <header class="topbar">
+        <h1>Incubation Batches</h1>
+        <div class="user-info"><span id="userEmail">-</span></div>
+      </header>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="batches">📦 Batches</button>
+        <button class="tab" data-tab="turnings">🔄 Turnings</button>
+        <button class="tab" data-tab="candling">🔍 Candling</button>
+      </div>
+
+      <!-- ============================================================
+           TAB 1: BATCHES
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-batches">
+        <div class="panel-header">
+          <h2>All Batches</h2>
+          <button id="addBatchBtn" class="btn-primary">+ Add Batch</button>
+        </div>
+
+        <!-- ADD BATCH FORM -->
+        <div id="addBatchForm" class="form-box" style="display:none;">
+          <h3>Add New Batch</h3>
+          <div class="input-group"><span>🥚</span><select id="batchIncubator"></select></div>
+          <div class="input-group"><span>🐔</span><select id="batchCategory"></select></div>
+          <div class="input-group"><span>📅</span><input type="date" id="batchStartDate"></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="batchEggs" placeholder="Eggs count"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="batchHatchDate"></div>
+          <div class="form-actions">
+            <button id="saveBatchBtn" class="btn-primary">Save</button>
+            <button id="cancelBatchBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <!-- VERIFY HATCH FORM -->
+        <div id="verifyHatchForm" class="form-box" style="display:none;">
+          <h3>Verify Hatch</h3>
+          <p class="muted" id="verifyBatchInfo">-</p>
+          <div class="input-group"><span>🐣</span><input type="number" id="verifyHatched" placeholder="Hatched (chicks)"></div>
+          <div class="input-group"><span>❌</span><input type="number" id="verifyFailed" placeholder="Failed (eggs)"></div>
+          <div class="input-group"><span>📅</span><input type="date" id="verifyHatchDate"></div>
+          <div class="form-actions">
+            <button id="saveVerifyBtn" class="btn-primary">Save Verification</button>
+            <button id="cancelVerifyBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Start Date</th>
+              <th>Eggs</th>
+              <th>Hatch Date</th>
+              <th>Hatched</th>
+              <th>Failed</th>
+              <th>Rate</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="batchesTableBody"><tr><td colspan="9">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           TAB 2: TURNINGS
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-turnings" style="display:none;">
+        <div class="panel-header">
+          <h2>Turning Logs</h2>
+          <button id="addTurningBtn" class="btn-primary">+ Add Turning</button>
+        </div>
+
+        <!-- ADD TURNING FORM -->
+        <div id="addTurningForm" class="form-box" style="display:none;">
+          <h3>Add Turning Log</h3>
+          <div class="input-group"><span>📦</span><select id="turnBatch"></select></div>
+          <div class="input-group"><span>🔢</span><input type="number" id="turnCount" placeholder="Turning count"></div>
+          <div class="input-group"><span>🌡️</span><input type="number" step="0.1" id="turnTemp" placeholder="Temperature (°C)"></div>
+          <div class="input-group"><span>💧</span><input type="number" id="turnHumidity" placeholder="Humidity (%)"></div>
+          <div class="input-group"><span>✅</span>
+            <select id="turnCondition">
+              <option value="good">Good</option>
+              <option value="average">Average</option>
+              <option value="bad">Bad</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button id="saveTurningBtn" class="btn-primary">Save</button>
+            <button id="cancelTurningBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Batch</th>
+              <th>Turns</th>
+              <th>Temp</th>
+              <th>Humidity</th>
+              <th>Condition</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="turningsTableBody"><tr><td colspan="8">No turning records yet.</td></tr></tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           TAB 3: CANDLING
+           ============================================================ -->
+      <section class="panel tab-content" id="tab-candling" style="display:none;">
+        <div class="panel-header">
+          <h2>Candling Results</h2>
+          <button id="addCandleBtn" class="btn-primary">+ Add Candling</button>
+        </div>
+
+        <!-- ADD CANDLING FORM -->
+        <div id="addCandleForm" class="form-box" style="display:none;">
+          <h3>Add Candling Result</h3>
+          <div class="input-group"><span>📦</span><select id="candleBatch"></select></div>
+          <div class="input-group"><span>📅</span>
+            <select id="candleDay">
+              <option value="7">Day 7</option>
+              <option value="14">Day 14</option>
+            </select>
+          </div>
+          <div class="input-group"><span>✅</span><input type="number" id="candleFertile" placeholder="Fertile eggs"></div>
+          <div class="input-group"><span>❌</span><input type="number" id="candleInfertile" placeholder="Infertile eggs"></div>
+          <div class="form-actions">
+            <button id="saveCandleBtn" class="btn-primary">Save</button>
+            <button id="cancelCandleBtn" class="btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Batch</th>
+              <th>Day</th>
+              <th>Fertile</th>
+              <th>Infertile</th>
+              <th>Rate</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="candlingTableBody"><tr><td colspan="8">Loading...</td></tr></tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
